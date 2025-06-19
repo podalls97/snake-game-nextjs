@@ -1,13 +1,46 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #1a1a1a;
-  --foreground: #ffffff;
   --board-bg: #2d2d2d;
   --snake-color: #4caf50;
   --overlay-bg: rgba(0, 0, 0, 0.8);
   --button-bg: #4caf50;
   --button-hover-bg: #45a049;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 @media (prefers-color-scheme: light) {
@@ -22,121 +55,277 @@
   }
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; /* Prevent scrollbars */
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
-.game-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100vw;
-  height: 100vh;
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
 }
 
-.score-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 20px;
-  box-sizing: border-box;
-  background-color: var(--board-bg);
-  border-bottom: 2px solid var(--foreground);
-  flex-shrink: 0;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
-.score-header h1 {
-    font-size: 1.2rem;
-    font-weight: bold;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
 
-.score {
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-.game-board {
+/* Realistic Snake Styles */
+.snake-head {
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 30%, #16a34a 70%, #15803d 100%);
+  border: 2px solid #22c55e;
+  border-radius: 60% 60% 40% 40%;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -2px 4px
+    rgba(0, 0, 0, 0.2);
   position: relative;
-  display: grid;
-  background-color: var(--board-bg);
-  border: 2px solid var(--foreground);
-  border-top: none;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  overflow: visible;
 }
 
-.snake {
-  background-color: var(--snake-color);
-  border-radius: 4px;
+.snake-head::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 30%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, transparent 100%);
+  border-radius: 50%;
 }
 
-.food {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px; /* Emoji size */
-  animation: pulse 1.5s infinite;
+.snake-neck {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+  border: 1px solid #16a34a;
+  border-radius: 30%;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px
+    rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+.snake-body {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 40%, #166534 80%, #14532d 100%);
+  border: 1px solid #15803d;
+  border-radius: 25%;
+  box-shadow: 0 0 4px rgba(22, 163, 74, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.15), inset 0 -1px 2px
+    rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
 }
 
-.game-overlay {
+.snake-tail {
+  background: linear-gradient(135deg, #15803d 0%, #166534 50%, #14532d 100%);
+  border: 1px solid #166534;
+  border-radius: 40% 40% 60% 60%;
+  box-shadow: 0 0 3px rgba(21, 128, 61, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 1px
+    rgba(0, 0, 0, 0.1);
+}
+
+/* Snake Eyes */
+.snake-eye {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, #000 30%, #333 70%, #000 100%);
+  border-radius: 50%;
+  top: 25%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+}
+
+.snake-eye::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--overlay-bg);
-  backdrop-filter: blur(5px);
-  text-align: center;
-  color: var(--foreground);
+  width: 2px;
+  height: 2px;
+  background: radial-gradient(circle, #fff 0%, transparent 70%);
+  border-radius: 50%;
 }
 
-.game-overlay h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.snake-eye-left {
+  left: 25%;
 }
 
-.game-overlay p {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
+.snake-eye-right {
+  right: 25%;
 }
 
-.game-overlay button {
-  padding: 12px 24px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: white;
-  background-color: var(--button-bg);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+/* Snake Nostrils */
+.snake-nostril {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: #000;
+  border-radius: 50%;
+  top: 45%;
 }
 
-.game-overlay button:hover {
-  background-color: var(--button-hover-bg);
+.snake-nostril-left {
+  left: 35%;
 }
 
-.controls {
-    margin-top: 2rem;
-    font-size: 1rem !important;
-    opacity: 0.8;
+.snake-nostril-right {
+  right: 35%;
 }
 
+/* Scale Pattern for Body */
+.snake-scale {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+.snake-scale-1 {
+  top: 20%;
+  left: 20%;
+  width: 6px;
+  height: 4px;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+  transform: rotate(15deg);
+}
+
+.snake-scale-2 {
+  top: 40%;
+  right: 25%;
+  width: 5px;
+  height: 3px;
+  background: linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
+  transform: rotate(-20deg);
+}
+
+.snake-scale-3 {
+  bottom: 25%;
+  left: 30%;
+  width: 4px;
+  height: 3px;
+  background: linear-gradient(30deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  transform: rotate(45deg);
+}
+
+/* Add subtle animation to scales */
+@keyframes scaleShimmer {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.snake-body .snake-scale {
+  animation: scaleShimmer 3s ease-in-out infinite;
+}
+
+.snake-body .snake-scale-2 {
+  animation-delay: 1s;
+}
+
+.snake-body .snake-scale-3 {
+  animation-delay: 2s;
+}
+
+/* Enhanced food styling */
+.realistic-food {
+  background: radial-gradient(circle at 30% 30%, #ff6b6b, #e74c3c, #c0392b);
+  border: 2px solid #e74c3c;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(231, 76, 60, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -2px 4px
+    rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.realistic-food::before {
+  content: "🍎";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.realistic-food::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  width: 40%;
+  height: 30%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+  border-radius: 50%;
+}
